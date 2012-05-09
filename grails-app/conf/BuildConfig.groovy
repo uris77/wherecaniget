@@ -51,6 +51,7 @@ grails.project.dependency.resolution = {
         test ":cucumber:0.4.0"
         test ":build-test-data:2.0.2"
 
+        compile ":zkui:0.5"
         compile ":fixtures:1.1-SNAPSHOT"
     }
 }
