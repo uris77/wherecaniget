@@ -48,10 +48,8 @@ grails.project.dependency.resolution = {
         build ":tomcat:$grailsVersion"
         compile ":spring-security-core:1.2.7.3"
 
-        if(Environment.current == Environment.TEST){
-         compile ":build-test-data:2.0.2"
-         compile ":spock:0.6"
-        }
+        test ":cucumber:0.4.0"
+        test ":build-test-data:2.0.2"
 
         compile ":fixtures:1.1-SNAPSHOT"
     }
