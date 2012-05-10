@@ -7,18 +7,21 @@ import org.wherecaniget.Store
 
 class CreateComposer {
     Window self
+    def storeService
+
+    def storeInstance
+
     def afterCompose = {Component comp ->
-        //todo initialize components here
     }
 
     void onClick_saveButton(Event e) {
-        def storeInstance = new Store(self.params)
-        if (!storeInstance.save(flush: true) && storeInstance.hasErrors()) {
-            log.error storeInstance.errors
-            self.renderErrors(bean: storeInstance)
-        } else {
-            flash.message = g.message(code: 'default.created.message', args: [g.message(code: 'store.label', default: 'Store'), storeInstance.id])
-            redirect(controller: "store", action: "list")
-        }
+      storeInstance = storeService.create(self.params)
+      if(storeInstance.errors){
+         log.info storeInstance.errors
+         self.renderErrors(bean: storeInstance)
+      }else{
+         flash.message = "Store saved successfully!"
+         redirect(controller: 'store', action: 'list')
+      }
     }
 }

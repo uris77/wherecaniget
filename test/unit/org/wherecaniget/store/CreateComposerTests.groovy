@@ -5,22 +5,35 @@ import static org.junit.Assert.*
 import grails.test.mixin.*
 import grails.test.mixin.support.*
 import org.junit.*
+import org.zkoss.zul.*
+import groovy.mock.interceptor.MockFor
+import org.wherecaniget.*
 
-/**
- * See the API for {@link grails.test.mixin.support.GrailsUnitTestMixin} for usage instructions
- */
 @TestMixin(GrailsUnitTestMixin)
+@Mock([Store])
 class CreateComposerTests {
 
-    void setUp() {
-        // Setup logic here
-    }
+   @Before
+   void setUp() {
+   }
 
-    void tearDown() {
-        // Tear down logic here
-    }
+   @After
+   void tearDown() {
+   }
 
-    void testSomething() {
-        fail "Implement me"
-    }
+   void test_save_button_should_create_new_store_when_clicked() {
+      Window.metaClass.getParams << {->[name: 'Store']}
+      StoreService.metaClass.create = {params-> [id: 1, name:'Store']}
+      CreateComposer.metaClass.redirect = {redirectParams -> '' }
+      CreateComposer composer = new CreateComposer()
+      composer.self = new Window()
+      composer.metaClass.flash = [:]
+      composer.metaClass.redirect = ""
+      composer.storeService = new StoreService()
+      composer.onClick_saveButton()
+
+      assertNotNull composer.storeInstance.id
+      assertEquals 'Store', composer.storeInstance.name
+      assertNull composer.storeInstance.errors
+   }
 }
