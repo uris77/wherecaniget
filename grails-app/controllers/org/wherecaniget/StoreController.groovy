@@ -9,11 +9,6 @@ class StoreController {
     def list = {}
 
     def create = {
-    /*
-        def storeInstance = new Store()
-        storeInstance.properties = params
-        return [storeInstance: storeInstance]
-        */
     }
 
     def edit = {
