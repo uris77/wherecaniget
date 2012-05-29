@@ -6,7 +6,7 @@ this.metaClass.mixin (cucumber.runtime.groovy.Hooks)
 GrailsTestRequestEnvironmentInterceptor scenarioInterceptor
 
 Before () {
-    scenarioInterceptor = new GrailsTestRequestEnvironmentInterceptor (appCtx)
+    scenarioInterceptor = new GrailsTestRequestEnvironmentInterceptor(appCtx)
     scenarioInterceptor.init ()
 }
 

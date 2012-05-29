@@ -8,6 +8,7 @@ StoreVM vm
 StoreListVM listVm = new StoreListVM()
 def storeList = []
 List<Store> listStore
+//StoreService storeService = new StoreService()
 
 Given(~"^I open new store form\$") {->
 }
@@ -24,7 +25,8 @@ Then(~"^I see \"([^\"]*)\" details\$")  {String arg1->
 }
 
 Given(~"^I already added \"([^\"]*)\"\$"){ String arg1->
-   new Store(name:'Store 1').save()
+   def storeService = appCtx.getBean('storeService')
+   storeService.create([name:'New Store'])
 }
 
 When(~"^I view the store list\$"){->
@@ -32,5 +34,6 @@ When(~"^I view the store list\$"){->
 }
 
 Then(~"^my store list contains \"([^\"]*)\"\$"){ String arg1->
-   assertTrue storeList.contains(storeInstance)
+   Store storeInstance = Store.findByName('New Store')
+   assertTrue Store.list().contains(storeInstance)
 }
