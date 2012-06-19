@@ -20,21 +20,20 @@ class StoreListVMTests {
       new Store(name:'Store3').save()
    }
 
-   @Test
-   void list_all_stores(){
-      def storeList = vm.search()
+    @Test
+    void list_all_stores(){
+        vm.search()
+        assertEquals 3, vm.storeList.size()
+    }
 
-      assertEquals 3, storeList.size()
-   }
 
+    @Test
+    void search_for_store_by_name(){
+        vm.filter = 'Store1'
+        vm.search()
 
-   @Test
-   void search_for_store_by_name(){
-      vm.filter = 'Store1'
-      def storeList = vm.search()
-
-      assertEquals 1, storeList.size()
-   }
+        assertEquals 1, vm.storeList.size()
+    }
 
 }
 
